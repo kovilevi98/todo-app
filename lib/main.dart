@@ -1,11 +1,16 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
 import 'package:theme_manager/change_theme_widget.dart';
 import 'package:theme_manager/theme_manager.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Required
+  await Firebase.initializeApp();
+
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   runApp(MyApp());
 }
 
@@ -85,7 +90,10 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Text("test")
+              Text("test"),
+              ElevatedButton(onPressed: (){
+                throw Exception();
+              }, child: Text("asd"))
             ],
           ),
         ),
