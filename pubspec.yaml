@@ -42,6 +42,7 @@ dependencies:
   iconswitcher: ^2.0.2
   localization: ^2.1.0
   firebase_crashlytics: ^3.0.15
+  icons_launcher: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -57,12 +58,21 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+icons_launcher:
+  image_path: "assets/ic_logo_border.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
+
 # The following section is specific to Flutter packages.
 flutter:
 
   # json files directory
   assets:
     - lib/i18n/
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
