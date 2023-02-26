@@ -43,6 +43,7 @@ dependencies:
   localization: ^2.1.0
   firebase_crashlytics: ^3.0.15
   icons_launcher: ^2.1.0
+  easy_splash_screen: ^1.0.4
 
 dev_dependencies:
   flutter_test:
@@ -69,9 +70,9 @@ icons_launcher:
 # The following section is specific to Flutter packages.
 flutter:
 
-  # json files directory
   assets:
     - lib/i18n/
+    - assets/
 
 
   # The following line ensures that the Material Icons font is

@@ -1,10 +1,10 @@
+import 'package:easy_splash_screen/easy_splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
-import 'package:theme_manager/change_theme_widget.dart';
 import 'package:theme_manager/theme_manager.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:todo_app/configs/images.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Required
@@ -36,7 +36,13 @@ class MyApp extends StatelessWidget {
             Locale('en', 'US'),
             Locale('es', 'ES'),
           ],
-          home: MyHomePage(),
+          home:  EasySplashScreen(
+            backgroundImage: const AssetImage(BACKGROUND_IMAGE),
+            showLoader: false,
+            navigator: MyHomePage(),
+            durationInSeconds: 5,
+            logo: Image.asset(SPLASH_IMAGE, width: 0),
+          ),
         );
       },
     );
@@ -73,9 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                   });
                 },
-                icon: Icon((light) ?
-                Icons.sunny :
-                Icons.dark_mode))
+                icon: Icon((light) ? Icons.sunny : Icons.dark_mode))
           ],
         ),
       ),
@@ -86,16 +90,18 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(key: Key("Text"), text),
-              ElevatedButton(key: Key("Button"),onPressed: (){
-                setState((){
-                  text = "test";
-                });
-              }, child: Text("button"))
+              ElevatedButton(
+                  key: Key("Button"),
+                  onPressed: () {
+                    setState(() {
+                      text = "test";
+                    });
+                  },
+                  child: Text("button"))
             ],
           ),
         ),
       ),
     );
   }
-
 }
