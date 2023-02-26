@@ -32,13 +32,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Theme Manager Demo',
           theme: theme,
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            LocalJsonLocalization.delegate,
-          ],
-          supportedLocales: [
+          supportedLocales: const [
             Locale('en', 'US'),
             Locale('es', 'ES'),
           ],
@@ -56,6 +50,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool light = false;
+  String text = "asd";
 
   @override
   Widget build(BuildContext context) {
@@ -90,10 +85,12 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Text("test"),
-              ElevatedButton(onPressed: (){
-                throw Exception();
-              }, child: Text("asd"))
+              Text(key: Key("Text"), text),
+              ElevatedButton(key: Key("Button"),onPressed: (){
+                setState((){
+                  text = "test";
+                });
+              }, child: Text("button"))
             ],
           ),
         ),
@@ -101,16 +98,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void showThemePicker() {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return ThemePickerDialog(
-          onSelectedTheme: (BrightnessPreference preference) {
-            ThemeManager.of(context).setBrightnessPreference(preference);
-          },
-        );
-      },
-    );
-  }
 }
