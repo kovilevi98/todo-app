@@ -6,13 +6,28 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_app/main.dart';
+
+Widget makeTestableWidget({ required Widget child }) {
+  return MediaQuery(
+    data: MediaQueryData(),
+    child: MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      home: child,
+    ),
+  );
+}
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(makeTestableWidget(child: MyHomePage()));
+    await tester.pumpAndSettle(Duration(seconds: 3));
 
     expect(find.text('asd'), findsOneWidget);
     expect(find.text('test'), findsNothing);
