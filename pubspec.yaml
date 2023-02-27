@@ -53,6 +53,7 @@ dependencies:
   mobx: ^2.1.4
   mobx_codegen: ^2.1.1
   flutter_mobx: ^2.0.6+5
+  dropdown_button2: ^2.0.0
 
 dev_dependencies:
   flutter_test:

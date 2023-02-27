@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:todo_app/widgets/dialogs/dialog.dart';
 
-Future<String?> showNewCardDialog({required BuildContext context, required Color backgroundColor}) async{
+Future<String?> showNewCardDialog({required BuildContext context, required Color backgroundColor, required bool rename, String? text}) async{
 
   var textController=TextEditingController();
-  bool rename=false;
+  if(text != null){
+    textController.text = text;
+  }
 
   await createDialog(
       context: context,
@@ -22,7 +24,7 @@ Future<String?> showNewCardDialog({required BuildContext context, required Color
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('add'.i18n() ,style: Theme.of(context).textTheme.headline3),
+                Text((rename) ? 'modify'.i18n() : 'add'.i18n() ,style: Theme.of(context).textTheme.headline3),
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical:10.0, horizontal: 30.0),
                     child: TextField(

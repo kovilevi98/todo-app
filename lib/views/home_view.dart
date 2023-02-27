@@ -4,6 +4,7 @@ import 'package:boardview/boardview.dart';
 import 'package:boardview/boardview_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:localization/localization.dart';
 import 'package:theme_manager/theme_manager.dart';
 import 'package:todo_app/configs/colors.dart';
@@ -68,6 +69,8 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget buildBoardItem(BoardItemData itemObject) {
+    String dropdownValue = 'One';
+
     return BoardItem(
         onStartDragItem:
             (int? listIndex, int? itemIndex, BoardItemState? state) {},
@@ -85,7 +88,34 @@ class _HomeViewState extends State<HomeView> {
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(itemObject.title!),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(itemObject.title!),
+                  PopupMenuButton(
+                    onSelected: (value) async {
+                      if(value == 'edit'){
+                        var result = await showNewCardDialog(context: context,backgroundColor:
+                        (_store.dark) ? AppColors.darkBlack : AppColors.grey, rename: true, text: itemObject.title);
+
+                        if(result != null){
+                          itemObject.title = result;
+                          setState(() {});
+                        }
+                      }
+                      // your logic
+                    },
+                    itemBuilder: (BuildContext bc) {
+                      return const [
+                        PopupMenuItem(
+                          child: Text("edit"),
+                          value: 'edit',
+                        ),
+                      ];
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ));
@@ -136,8 +166,8 @@ class _HomeViewState extends State<HomeView> {
                 var result = await showNewCardDialog(
                     context: context,
                     backgroundColor:
-                        (_store.dark) ? AppColors.darkBlack : AppColors.grey);
-                if(result != null){
+                        (_store.dark) ? AppColors.darkBlack : AppColors.grey, rename: false);
+                if (result != null) {
                   var item = BoardItemData(title: result);
                   _store.listData[list.index].items!.add(item);
                   setState(() {});
