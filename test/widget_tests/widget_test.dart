@@ -5,10 +5,12 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:boardview/boardview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/main.dart';
+import 'package:todo_app/board_view/board_list.dart';
+import 'package:todo_app/views/home_view.dart';
 
 Widget makeTestableWidget({ required Widget child }) {
   return MediaQuery(
@@ -24,20 +26,12 @@ Widget makeTestableWidget({ required Widget child }) {
 }
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('The three columns are visible', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(makeTestableWidget(child: MyHomePage()));
+    await tester.pumpWidget(makeTestableWidget(child: HomeView()));
     await tester.pumpAndSettle(Duration(seconds: 3));
 
-    expect(find.text('asd'), findsOneWidget);
-    expect(find.text('test'), findsNothing);
-
-    // Tap the button.
-    await tester.tap(find.byKey(const Key("Button")));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('asd'), findsNothing);
-    expect(find.text('test'), findsOneWidget);
+    expect(find.byType(BoardView), findsOneWidget);
+    expect(find.byType(ElevatedButton), findsNWidgets(3));
   });
 }
