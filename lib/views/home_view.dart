@@ -76,7 +76,7 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget buildBoardItem(BoardItemData itemObject) {
+  Widget buildBoardItem(BoardItemData itemObject, int index) {
     return BoardItem(
         onStartDragItem:
             (int? listIndex, int? itemIndex, BoardItemState? state) {},
@@ -93,13 +93,19 @@ class _HomeViewState extends State<HomeView> {
         item: ItemWidget(
           itemObject: itemObject,
           dark: _store.dark,
+          listIndex: index,
+          refresh: _store.refresh(),
+          sendArchive: (uuid){
+            _store.sendArchive(uuid);
+            setState(() {});
+          }
         ));
   }
 
   Widget _createBoardList(BoardListData list) {
     List<BoardItem> items = [];
     for (int i = 0; i < list.items!.length; i++) {
-      items.insert(i, buildBoardItem(list.items![i]) as BoardItem);
+      items.insert(i, buildBoardItem(list.items![i], list.index!) as BoardItem);
     }
 
     return BoardList(
