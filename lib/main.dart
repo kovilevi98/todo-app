@@ -7,8 +7,8 @@ import 'package:localization/localization.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:theme_manager/theme_manager.dart';
 import 'package:todo_app/configs/images.dart';
+import 'package:todo_app/services/firestore_service.dart';
 import 'package:todo_app/views/home_view.dart';
-import 'package:todo_app/views/kanban_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Required
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     LocalJsonLocalization.delegate.directories = ['lib/i18n'];
 
     return ThemeManager(
-      defaultBrightnessPreference: BrightnessPreference.system,
+      defaultBrightnessPreference: BrightnessPreference.light,
       data: (Brightness brightness) => ThemeData(
         primarySwatch: Colors.blue,
         brightness: brightness,
@@ -47,13 +47,17 @@ class MyApp extends StatelessWidget {
             home: EasySplashScreen(
               backgroundImage: const AssetImage(BACKGROUND_IMAGE),
               showLoader: false,
-              navigator: HomeView(),
-              durationInSeconds: 1,
+              futureNavigator: loadData(),
               logo: Image.asset(SPLASH_IMAGE, width: 0),
             ),
           );
         });
       },
     );
+  }
+
+  Future<Widget> loadData() async {
+    var result = await Firestore.getAllEntries('boards');
+    return Future.value(HomeView(init: (result.isNotEmpty) ? result.first : null,));
   }
 }

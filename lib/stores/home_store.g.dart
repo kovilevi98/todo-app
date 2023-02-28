@@ -55,15 +55,31 @@ mixin _$HomeStore on _HomeStore, Store {
     });
   }
 
+  late final _$addTaskAsyncAction =
+      AsyncAction('_HomeStore.addTask', context: context);
+
+  @override
+  Future<void> addTask(String title, int index) {
+    return _$addTaskAsyncAction.run(() => super.addTask(title, index));
+  }
+
+  late final _$refreshAsyncAction =
+      AsyncAction('_HomeStore.refresh', context: context);
+
+  @override
+  Future<void> refresh() {
+    return _$refreshAsyncAction.run(() => super.refresh());
+  }
+
   late final _$_HomeStoreActionController =
       ActionController(name: '_HomeStore', context: context);
 
   @override
-  void addTask(String title, int index) {
+  void init(BoardData? boardData) {
     final _$actionInfo =
-        _$_HomeStoreActionController.startAction(name: '_HomeStore.addTask');
+        _$_HomeStoreActionController.startAction(name: '_HomeStore.init');
     try {
-      return super.addTask(title, index);
+      return super.init(boardData);
     } finally {
       _$_HomeStoreActionController.endAction(_$actionInfo);
     }
