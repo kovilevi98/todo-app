@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         brightness: brightness,
       ),
-      loadBrightnessOnStart: true,
+      loadBrightnessOnStart: false,
       themedWidgetBuilder: (BuildContext context, ThemeData theme) {
         return ResponsiveSizer(builder: (context, orientation, screenType) {
           return MaterialApp(

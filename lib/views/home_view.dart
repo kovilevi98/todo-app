@@ -78,6 +78,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget buildBoardItem(BoardItemData itemObject, int index) {
     return BoardItem(
+        draggable: _store.dragAble,
         onStartDragItem:
             (int? listIndex, int? itemIndex, BoardItemState? state) {},
         onDropItem: (int? listIndex, int? itemIndex, int? oldListIndex,
@@ -98,7 +99,12 @@ class _HomeViewState extends State<HomeView> {
           sendArchive: (uuid){
             _store.sendArchive(uuid);
             setState(() {});
-          }
+          },
+          start: (uuid) {
+            _store.start(uuid);
+          }, onTimeChanged: (uuid, time) {
+            _store.onTimeChanged(uuid, time);
+        },
         ));
   }
 

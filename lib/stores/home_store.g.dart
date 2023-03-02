@@ -55,6 +55,22 @@ mixin _$HomeStore on _HomeStore, Store {
     });
   }
 
+  late final _$dragAbleAtom =
+      Atom(name: '_HomeStore.dragAble', context: context);
+
+  @override
+  bool get dragAble {
+    _$dragAbleAtom.reportRead();
+    return super.dragAble;
+  }
+
+  @override
+  set dragAble(bool value) {
+    _$dragAbleAtom.reportWrite(value, super.dragAble, () {
+      super.dragAble = value;
+    });
+  }
+
   late final _$addTaskAsyncAction =
       AsyncAction('_HomeStore.addTask', context: context);
 
@@ -71,8 +87,44 @@ mixin _$HomeStore on _HomeStore, Store {
     return _$refreshAsyncAction.run(() => super.refresh());
   }
 
+  late final _$onTimeChangedAsyncAction =
+      AsyncAction('_HomeStore.onTimeChanged', context: context);
+
+  @override
+  Future<void> onTimeChanged(String uuid, int time) {
+    return _$onTimeChangedAsyncAction
+        .run(() => super.onTimeChanged(uuid, time));
+  }
+
+  late final _$sendArchiveAsyncAction =
+      AsyncAction('_HomeStore.sendArchive', context: context);
+
+  @override
+  Future<void> sendArchive(String uuid) {
+    return _$sendArchiveAsyncAction.run(() => super.sendArchive(uuid));
+  }
+
+  late final _$startAsyncAction =
+      AsyncAction('_HomeStore.start', context: context);
+
+  @override
+  Future<void> start(String uuid) {
+    return _$startAsyncAction.run(() => super.start(uuid));
+  }
+
   late final _$_HomeStoreActionController =
       ActionController(name: '_HomeStore', context: context);
+
+  @override
+  void changeDragAble() {
+    final _$actionInfo = _$_HomeStoreActionController.startAction(
+        name: '_HomeStore.changeDragAble');
+    try {
+      return super.changeDragAble();
+    } finally {
+      _$_HomeStoreActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void init(BoardData? boardData) {
@@ -90,7 +142,8 @@ mixin _$HomeStore on _HomeStore, Store {
     return '''
 listData: ${listData},
 list: ${list},
-dark: ${dark}
+dark: ${dark},
+dragAble: ${dragAble}
     ''';
   }
 }

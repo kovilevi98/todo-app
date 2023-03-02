@@ -24,6 +24,9 @@ abstract class _HomeStore with Store {
   @observable
   bool dark = false;
 
+  @observable
+  bool dragAble = true;
+
   String? boardUuid;
 
   // actions:-------------------------------------------------------------------
@@ -48,6 +51,16 @@ abstract class _HomeStore with Store {
   }
 
   @action
+  Future<void> onTimeChanged(String uuid, int time) async {
+    for (var element in listData) {
+      var index = element.items!.indexWhere((element2) => element2.uuid == uuid);
+      if(index > -1){
+        element.items![index].currentTimeSpent = time;
+      }
+    }
+  }
+
+  @action
   Future<void> sendArchive(String uuid) async {
       for (var element in listData) {
           var index = element.items!.indexWhere((element2) => element2.uuid == uuid);
@@ -59,6 +72,15 @@ abstract class _HomeStore with Store {
       await refresh();
   }
 
+  @action
+  Future<void> start(String uuid) async {
+
+  }
+
+  @action
+  void changeDragAble(){
+      dragAble = !dragAble;
+  }
 
   @action
   void init(BoardData? boardData) {
