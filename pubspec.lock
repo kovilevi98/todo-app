@@ -199,6 +199,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  custom_sidemenu:
+    dependency: "direct main"
+    description:
+      name: custom_sidemenu
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   dart_style:
     dependency: transitive
     description:
@@ -335,6 +342,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.6+5"
+  flutter_screenutil:
+    dependency: transitive
+    description:
+      name: flutter_screenutil
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.6.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -409,7 +423,7 @@ packages:
     source: hosted
     version: "4.0.15"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -714,6 +728,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
+  stop_watch_timer:
+    dependency: "direct main"
+    description:
+      name: stop_watch_timer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   stream_channel:
     dependency: transitive
     description:

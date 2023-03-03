@@ -59,6 +59,9 @@ dependencies:
   json_annotation: ^4.8.0
   uuid: ^3.0.7
   fake_cloud_firestore: ^2.0.0
+  stop_watch_timer: ^2.0.0
+  custom_sidemenu: ^0.0.3
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

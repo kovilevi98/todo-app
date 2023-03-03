@@ -9,6 +9,7 @@ import 'package:theme_manager/theme_manager.dart';
 import 'package:todo_app/configs/images.dart';
 import 'package:todo_app/services/firestore_service.dart';
 import 'package:todo_app/views/home_view.dart';
+import 'package:todo_app/views/menu_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Required
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         brightness: brightness,
       ),
-      loadBrightnessOnStart: true,
+      loadBrightnessOnStart: false,
       themedWidgetBuilder: (BuildContext context, ThemeData theme) {
         return ResponsiveSizer(builder: (context, orientation, screenType) {
           return MaterialApp(
@@ -58,6 +59,6 @@ class MyApp extends StatelessWidget {
 
   Future<Widget> loadData() async {
     var result = await Firestore.getAllEntries('boards');
-    return Future.value(HomeView(init: (result.isNotEmpty) ? result.first : null,));
+    return Future.value(MenuPage(init: (result.isNotEmpty) ? result.first : null,));
   }
 }

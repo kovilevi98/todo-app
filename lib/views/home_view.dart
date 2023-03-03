@@ -37,30 +37,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Text('welcome-text'.i18n()),
-            Observer(
-              builder: (_) => IconButton(
-                  onPressed: () {
-                    if (_store.dark) {
-                      _store.dark = false;
-                      ThemeManager.of(context)
-                          .setBrightnessPreference(BrightnessPreference.light);
-                    } else {
-                      _store.dark = true;
-                      ThemeManager.of(context)
-                          .setBrightnessPreference(BrightnessPreference.dark);
-                    }
-                  },
-                  icon: Icon((_store.dark) ? Icons.sunny : Icons.dark_mode)),
-            )
-          ],
-        ),
-      ),
-      body: Observer(
+    return Observer(
         builder: (_) {
           List<BoardList> lists = [];
           for (int i = 0; i < _store.listData.length; i++) {
@@ -72,12 +49,13 @@ class _HomeViewState extends State<HomeView> {
             boardViewController: boardViewController,
           );
         },
-      ),
+
     );
   }
 
-  Widget buildBoardItem(BoardItemData itemObject) {
+  Widget buildBoardItem(BoardItemData itemObject, int index) {
     return BoardItem(
+        draggable: _store.dragAble,
         onStartDragItem:
             (int? listIndex, int? itemIndex, BoardItemState? state) {},
         onDropItem: (int? listIndex, int? itemIndex, int? oldListIndex,
@@ -93,13 +71,24 @@ class _HomeViewState extends State<HomeView> {
         item: ItemWidget(
           itemObject: itemObject,
           dark: _store.dark,
+          listIndex: index,
+          refresh: _store.refresh(),
+          sendArchive: (uuid){
+            _store.sendArchive(uuid);
+            setState(() {});
+          },
+          start: (uuid) {
+            _store.start(uuid);
+          }, onTimeChanged: (uuid, time) {
+            _store.onTimeChanged(uuid, time);
+        },
         ));
   }
 
   Widget _createBoardList(BoardListData list) {
     List<BoardItem> items = [];
     for (int i = 0; i < list.items!.length; i++) {
-      items.insert(i, buildBoardItem(list.items![i]) as BoardItem);
+      items.insert(i, buildBoardItem(list.items![i], list.index!) as BoardItem);
     }
 
     return BoardList(
