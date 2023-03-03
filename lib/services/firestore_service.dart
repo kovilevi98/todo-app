@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:todo_app/models/archive.dart';
 import 'package:todo_app/models/board.dart';
 
 class Firestore {
@@ -6,6 +7,13 @@ class Firestore {
     return (await FirebaseFirestore.instance.collection(collection).get())
         .docs
         .map((item) => BoardData.fromJson(item.data()))
+        .toList();
+  }
+
+  static Future<List> getAllArchives() async {
+    return (await FirebaseFirestore.instance.collection('archives').get())
+        .docs
+        .map((item) => Archive.fromJson(item.data()))
         .toList();
   }
 
