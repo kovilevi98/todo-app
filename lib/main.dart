@@ -2,13 +2,14 @@ import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:theme_manager/theme_manager.dart';
 import 'package:todo_app/configs/images.dart';
+import 'package:todo_app/configs/strings.dart';
 import 'package:todo_app/services/firestore_service.dart';
-import 'package:todo_app/views/home_view.dart';
 import 'package:todo_app/views/menu_view.dart';
 
 Future<void> main() async {
@@ -16,6 +17,10 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(MyApp());
 }
 
@@ -34,6 +39,7 @@ class MyApp extends StatelessWidget {
       themedWidgetBuilder: (BuildContext context, ThemeData theme) {
         return ResponsiveSizer(builder: (context, orientation, screenType) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             theme: theme,
             supportedLocales: const [
               Locale('en', 'US'),
@@ -58,7 +64,7 @@ class MyApp extends StatelessWidget {
   }
 
   Future<Widget> loadData() async {
-    var result = await Firestore.getAllEntries('boards');
+    var result = await Firestore.getAllBoards(BOARD_COLLECTION);
     return Future.value(MenuPage(init: (result.isNotEmpty) ? result.first : null,));
   }
 }

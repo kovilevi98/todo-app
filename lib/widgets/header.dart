@@ -23,8 +23,6 @@ class _HeaderState extends State<Header> {
               widget.list.title!,
               style: TextStyle(
                   fontSize: 20,
-                  color:
-                  (widget.dark) ? AppColors.blue : AppColors.darkBlack),
-            )));
+            ))));
   }
 }

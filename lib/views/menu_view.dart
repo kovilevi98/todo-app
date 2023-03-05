@@ -1,8 +1,14 @@
 import 'package:custom_sidemenu/custom_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:localization/localization.dart';
 import 'package:theme_manager/theme_manager.dart';
+import 'package:todo_app/configs/colors.dart';
+import 'package:todo_app/configs/images.dart';
+import 'package:todo_app/configs/strings.dart';
 import 'package:todo_app/models/board.dart';
+import 'package:todo_app/services/csv_service.dart';
+import 'package:todo_app/services/firestore_service.dart';
 import 'package:todo_app/stores/theme_store.dart';
 import 'package:todo_app/views/history_view.dart';
 import 'package:todo_app/views/home_view.dart';
@@ -34,7 +40,7 @@ class _MenuPageState extends State<MenuPage> {
                 .setBrightnessPreference(BrightnessPreference.dark);
           }
         },
-        title: 'Theme',
+        title: 'theme'.i18n(),
         leadingIcon: Icons.sunny,
         iconSize: 22,
         titleSize: 16,
@@ -44,7 +50,7 @@ class _MenuPageState extends State<MenuPage> {
           store.home = true;
           setState(() {});
         },
-        title: 'Home',
+        title: 'home'.i18n(),
         leadingIcon: Icons.home,
         iconSize: 22,
         titleSize: 16,
@@ -54,8 +60,21 @@ class _MenuPageState extends State<MenuPage> {
           store.home = false;
           setState(() {});
         },
-        title: 'History',
+        title: 'history'.i18n(),
         leadingIcon: Icons.history,
+        iconSize: 22,
+        titleSize: 16,
+      ),
+      CustomMenuItem(
+        callback: () async {
+          var boardData = await Firestore.getAllBoards(BOARD_COLLECTION);
+          var result = await CsvExportService().generateCsv(boardData.first);
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(result),
+          ));
+        },
+        title: 'export'.i18n(),
+        leadingIcon: Icons.import_export,
         iconSize: 22,
         titleSize: 16,
       ),
@@ -64,8 +83,21 @@ class _MenuPageState extends State<MenuPage> {
     return Scaffold(
         body: Observer(
       builder: (_) => CustomDrawer(
-        homeWidget: Center(
-          child: (store.home) ? HomeView(init: widget.init) : HistoryPage(),
+        homeWidget: Stack(
+          children: [
+            Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Image.asset(
+                  (store.dark) ? BG_BLACK : BG_WHITE,
+                  fit: BoxFit.fitHeight,
+                )),
+            (store.home)
+                ? HomeView(init: widget.init)
+                : HistoryPage(
+                    dark: store.dark,
+                  ),
+          ],
         ),
         menuItemsList: menuItemsList,
         appBarActions: [],

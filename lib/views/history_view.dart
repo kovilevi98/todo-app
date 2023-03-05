@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/services/firestore_service.dart';
 import 'package:todo_app/stores/archive_store.dart';
-import 'package:todo_app/widgets/history_item.dart';
+import 'package:todo_app/widgets/history_item_widget.dart';
 
 class HistoryPage extends StatefulWidget {
-  const HistoryPage({Key? key}) : super(key: key);
+  final bool dark;
+  const HistoryPage({Key? key, required this.dark}) : super(key: key);
 
   @override
   State<HistoryPage> createState() => _HistoryPageState();
@@ -22,17 +22,16 @@ class _HistoryPageState extends State<HistoryPage> {
         AsyncSnapshot<void> snapshot,
       ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else {
           return Center(
             child: ListView.builder(
                 itemCount: store.list.length,
                 itemBuilder: (_, index) {
-                  return Expanded(
-                      child: HistoryItem(
+                  return HistoryItem(
                     title: store.list[index].title,
-                    finishedTime: store.list[index].finished,
-                  ));
+                    finishedTime: store.list[index].finished, dark: widget.dark, spentTime: store.list[index].timeSpent.toString(),
+                  );
                 }),
           );
         }

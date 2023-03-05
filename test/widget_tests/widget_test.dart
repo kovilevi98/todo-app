@@ -25,6 +25,7 @@ Widget makeTestableWidget({ required Widget child }) {
 }
 
 const BoardsCollection = 'boards';
+const ArchiveColletion = 'archives';
 
 void main() {
   testWidgets('The three columns are visible', (WidgetTester tester) async {
@@ -38,41 +39,25 @@ void main() {
 
   /*testWidgets('Fake firebase collection', (WidgetTester tester) async {
     // Populate the fake database.
-    final firestore = FakeFirebaseFirestore();
-    var uuid = Uuid();
-    await firestore.collection(BoardsCollection).add({
-      'data': {
-        '0': {
-          'index': 0,
-          'items': {
-            'title': 'entry0',
-            'uuid': uuid.v4(),
-          }
-        },
-        '1': {
-          'index': 1,
-          'items': {
-            'title': 'entry0',
-            'uuid': uuid.v4(),
-          }
-        },
-        '2': {
-          'index': 2,
-          'items': {
-            'title': 'entry0',
-            'uuid': uuid.v4(),
-          }
-        }
-      },
-      'uuid': uuid.v4(),
-    });
+   /* final firestore = FakeFirebaseFirestore();
+    var uuid = const Uuid();
+    var itemData1 = BoardItemData(uuid: uuid.v4(), title: 'Entry1');
+    var itemData2 = BoardItemData(uuid: uuid.v4(), title: 'Entry2');
+    var itemData3 = BoardItemData(uuid: uuid.v4(), title: 'Entry3');
+    var listData1 = BoardListData(title: 'TODO', index: 0, items: [itemData1]);
+    var listData2 = BoardListData(title: 'IN PROGRESS', index: 2, items: [itemData2]);
+    var listData3 = BoardListData(title: 'DONE', index: 3, items: [itemData3]);
+    var data = BoardData(uuid: uuid.v4(), data: [listData1, listData2, listData3]);
 
+    await firestore.collection(BoardsCollection).add(
+        data.toJson()
+    );
     // Let the snapshots stream fire a snapshot.
     await tester.idle();
     // Re-render.
     await tester.pump();
 
-    var result = (await firestore.collection('boards').get()).docs
+    var result = (await firestore.collection(BoardsCollection).get()).docs
         .map((item) => BoardData.fromJson(item.data()))
         .toList();
 
@@ -81,6 +66,6 @@ void main() {
     await tester.pumpAndSettle(Duration(seconds: 3));
 
     expect(find.byType(BoardView), findsOneWidget);
-    expect(find.byType(ElevatedButton), findsNWidgets(3));
+    expect(find.byType(ElevatedButton), findsNWidgets(3));*/
   });*/
 }
