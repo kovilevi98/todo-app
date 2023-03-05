@@ -16,7 +16,6 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
-    print(widget.dark);
     return  Expanded(
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: Adaptive.px(15), vertical: Adaptive.px(10)),

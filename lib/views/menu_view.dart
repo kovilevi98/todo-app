@@ -4,8 +4,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:localization/localization.dart';
 import 'package:theme_manager/theme_manager.dart';
 import 'package:todo_app/configs/colors.dart';
+import 'package:todo_app/configs/strings.dart';
 import 'package:todo_app/models/board.dart';
 import 'package:todo_app/services/csv_service.dart';
+import 'package:todo_app/services/firestore_service.dart';
 import 'package:todo_app/stores/theme_store.dart';
 import 'package:todo_app/views/history_view.dart';
 import 'package:todo_app/views/home_view.dart';
@@ -64,7 +66,8 @@ class _MenuPageState extends State<MenuPage> {
       ),
       CustomMenuItem(
         callback: () async {
-          var result = await CsvExportService().generateCsv();
+          var boardData = await Firestore.getAllBoards(BOARD_COLLECTION);
+          var result = await CsvExportService().generateCsv(boardData.first);
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(result),
           ));

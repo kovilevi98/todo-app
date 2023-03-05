@@ -7,6 +7,7 @@ import 'package:localization/localization.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:theme_manager/theme_manager.dart';
 import 'package:todo_app/configs/images.dart';
+import 'package:todo_app/configs/strings.dart';
 import 'package:todo_app/services/firestore_service.dart';
 import 'package:todo_app/views/home_view.dart';
 import 'package:todo_app/views/menu_view.dart';
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
   }
 
   Future<Widget> loadData() async {
-    var result = await Firestore.getAllEntries('boards');
+    var result = await Firestore.getAllBoards(BOARD_COLLECTION);
     return Future.value(MenuPage(init: (result.isNotEmpty) ? result.first : null,));
   }
 }

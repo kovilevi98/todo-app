@@ -9,11 +9,8 @@ import 'package:todo_app/models/board.dart';
 import 'package:todo_app/services/firestore_service.dart';
 
 class CsvExportService {
-  generateCsv() async {
+  generateCsv(BoardData board) async {
    try{
-     var result = await Firestore.getAllEntries("boards");
-     BoardData board = result.first;
-
      List<List<String>> data = [
        ["UUID", "COLUMN_NAME", "TITLE", "TIME"],
      ];
