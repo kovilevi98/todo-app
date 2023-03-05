@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:localization/localization.dart';
 import 'package:theme_manager/theme_manager.dart';
 import 'package:todo_app/configs/colors.dart';
+import 'package:todo_app/configs/images.dart';
 import 'package:todo_app/configs/strings.dart';
 import 'package:todo_app/models/board.dart';
 import 'package:todo_app/services/csv_service.dart';
@@ -82,12 +83,21 @@ class _MenuPageState extends State<MenuPage> {
     return Scaffold(
         body: Observer(
       builder: (_) => CustomDrawer(
-        homeWidget: Center(
-          child: (store.home)
-              ? HomeView(init: widget.init)
-              : HistoryPage(
-                  dark: store.dark,
-                ),
+        homeWidget: Stack(
+          children: [
+            Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Image.asset(
+                  (store.dark) ? BG_BLACK : BG_WHITE,
+                  fit: BoxFit.fitHeight,
+                )),
+            (store.home)
+                ? HomeView(init: widget.init)
+                : HistoryPage(
+                    dark: store.dark,
+                  ),
+          ],
         ),
         menuItemsList: menuItemsList,
         appBarActions: [],

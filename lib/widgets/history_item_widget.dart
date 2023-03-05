@@ -27,7 +27,6 @@ class HistoryItem extends StatelessWidget {
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
-                //set border radius more than 50% of height and width to make circle
               ),
               child: GlassMorphism(
                 start: 0.9,
