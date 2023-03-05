@@ -5,5 +5,16 @@
   "done": "Done",
   "add": "Add item",
   "save": "Save",
-  "edit": "Edit"
+  "edit": "Edit",
+  "theme": "Theme",
+  "home": "Home",
+  "history": "History",
+  "export": "Export",
+  "start": "Start",
+  "stop": "Stop",
+  "archive": "Archive",
+  "success_export": "The export was successful you can view the csv file here: ",
+  "error_export": "Something went wrong during the export",
+  "spent_time": "Spent time: ",
+  "finished_at": "Finished at: "
 }

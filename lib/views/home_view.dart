@@ -81,6 +81,8 @@ class _HomeViewState extends State<HomeView> {
             _store.start(uuid);
           }, onTimeChanged: (uuid, time) {
             _store.onTimeChanged(uuid, time);
+        }, getIndex: (uuid ) {
+            return _store.getIndex(uuid);
         },
         ));
   }

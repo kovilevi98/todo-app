@@ -16,6 +16,7 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
+    print(widget.dark);
     return  Expanded(
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: Adaptive.px(15), vertical: Adaptive.px(10)),
@@ -23,8 +24,6 @@ class _HeaderState extends State<Header> {
               widget.list.title!,
               style: TextStyle(
                   fontSize: 20,
-                  color:
-                  (widget.dark) ? AppColors.blue : AppColors.darkBlack),
-            )));
+            ))));
   }
 }

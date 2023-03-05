@@ -1,3 +1,20 @@
 {
-  "welcome-text": "Este texto esta en español"
+  "welcome-text": "Este texto está en inglés",
+  "todo": "Todo",
+  "in-progress": "En curso",
+  "done": "Hecho",
+  "add": "Agregar elemento",
+  "save": "Guardar",
+  "edit": "Editar",
+  "theme": "Tema",
+  "home": "Hogar",
+  "history": "Historia",
+  "export": "Exportar",
+  "start": "Inicio",
+  "stop": "Stop",
+  "archive": "Archivo",
+  "success_export": "La exportación fue exitosa, puede ver el archivo csv aquí: ",
+  "error_export": "Algo salió mal durante la exportación",
+  "spent_time": "Tiempo pasado: ",
+  "finished_at": "Terminó en: "
 }

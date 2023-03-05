@@ -62,6 +62,17 @@ abstract class _HomeStore with Store {
   }
 
   @action
+  int getIndex(String uuid){
+    for (var element in listData) {
+      var index = element.items!.indexWhere((element2) => element2.uuid == uuid);
+      if(index > -1){
+          return element.index!;
+      }
+    }
+    return 0;
+  }
+
+  @action
   Future<void> sendArchive(String uuid) async {
       for (var element in listData) {
           var index = element.items!.indexWhere((element2) => element2.uuid == uuid);
@@ -107,7 +118,7 @@ abstract class _HomeStore with Store {
 
       var item2 = BoardListData(
           title: "done".i18n(),
-          index: 1,
+          index: 2,
           items: List.of([
             BoardItemData(title: "entry1", uuid: uuid.v4()),
           ]));
