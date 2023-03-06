@@ -2,9 +2,7 @@
 
 ## Introduction
 
-First of all, I would like to thank you for the possibility to show my knowledge in flutter. I hope I could prove it. Unfortunately, I can not be delighted, due to the fact that I did not have too much time during these nine days next to my full-time job and the university. In the beginning, a made some awful decisions and because of those, I had to follow a bad way in the development. I have chosen to use an external library (boardview) for the main UI to spare some time, but because of this my hands were tied and I could not make proper state management and there are too many refresh and API calls. I tried to fork that library and make some changes, but the time limit was not enough.
-If I could restart I am pretty sure I would make my own BoardListView.
-The second mistake was with the ThemeBuilder for the dark/light mode. I wanted to try a new package for this and it was not working as I expected, the quality of the code has deteriorated a bit.
+First, I would like to thank you for the opportunity to show my knowledge of flutter. I hope I could proven it. Unfortunately, I can not be delighted because I did not have too much time during these nine days next to my full-time job and the university. In the beginning, a made some awful decisions and because of those, I had to follow a bad way in the development. I have chosen to use an external library (boardview) for the main UI to spare some time, but because of this my hands were tied and I could not make proper state management and there are too many refresh and API calls. I tried to fork that library and make some changes, but the time limit was not enough. If I could restart I am pretty sure I would make my own BoardListView. The second mistake was with the ThemeBuilder for the dark/light mode. I wanted to try a new package for this and it was not working as I expected, the quality of the code has deteriorated a bit.
 ## Running the app
 I used the latest Flutter version, so you should be able to build the application with this command:
 ```
@@ -30,7 +28,7 @@ I connected the Firebase analytics and crashlytics as well.
 I used the flutter_localizations i18 package for the multilanguage support, and I added English and Spanish localization files, which are selected by the system language. (default English)
 
 ## CI/CD
-For the Continuous Integration and Continuous Deployment, I created GitHub action for Android apk build. I know it is not fully cover the requirements, but I had time for doing this, I also have experience with CI/CD in Jenkins.
+For the Continuous Integration and Continuous Deployment, I created a GitHub action for the Android apk build. I know it is not fully cover the requirements, but I had time for doing this, I also have experience with CI/CD in Jenkins.
 
 
 
